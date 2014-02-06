@@ -11,6 +11,7 @@ class Main {
 
     public static boolean enableText = true;
     private static Color[] colors = new Color[] {
+        /*
         Color.white,
         Color.red,
         Color.green,
@@ -18,6 +19,12 @@ class Main {
         Color.cyan,
         Color.magenta,
         Color.orange,
+        */
+        new Color(105,210,231),
+        new Color(167,219,216),
+        new Color(224,228,204),
+        new Color(243,134,48),
+        new Color(250,105,0)
     };
     private static int colorIndex = 0;
 
@@ -107,6 +114,7 @@ class Main {
         }
         g.drawRect(nx, ny, nw - 1, nh - 1);
         if(enableText) {
+            //g.setColor(Color.black);
             g.drawString(w+" x "+h+" - "+ratio+" ("+comment+")", nx + 2, ny + 14);
         }
     }
