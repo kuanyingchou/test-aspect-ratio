@@ -81,17 +81,40 @@ class Main {
         drawRect(g, 4096, 2160, "DCI 4K");
     }
     private static void drawRatios(Graphics g) {
-        drawRatio(g, 2048, 1536, "iPad Air");
-        drawRatio(g, 1920, 1200, "Nexus 7 2013");
-        drawRatio(g, 1920, 1080, "Galaxy S4");
-        drawRatio(g, 1420, 964);
-        drawRatio(g, 1280, 800, "Nexus 7 2012");
-        drawRatio(g, 1280, 720, "Galaxy Note II");
-        drawRatio(g, 1024, 768);
-        drawRatio(g, 1136, 640, "iPhone 5/5s");
-        drawRatio(g, 960, 640, "iPhone 4/4s");
-        drawRatio(g, 800, 480, "HTC Desire");
-        drawRatio(g, 480, 320, "iPhone 3G/3GS");
+        int score = 0;
+        final java.util.List<Integer> scores = 
+                new java.util.ArrayList<Integer>();
+        drawRatio(g, width, height, "image");
+        scores.add( drawRatio(g, 2048, 1536, "iPad Air"));
+        scores.add( drawRatio(g, 1920, 1200, "Nexus 7 2013"));
+        scores.add( drawRatio(g, 1920, 1080, "Galaxy S4"));
+        scores.add( drawRatio(g, 1420, 964));
+        scores.add( drawRatio(g, 1280, 800, "Nexus 7 2012"));
+        scores.add( drawRatio(g, 1280, 720, "Galaxy Note II"));
+        scores.add( drawRatio(g, 1024, 768));
+        scores.add( drawRatio(g, 1136, 640, "iPhone 5/5s"));
+        scores.add( drawRatio(g, 960, 640, "iPhone 4/4s"));
+        scores.add( drawRatio(g, 800, 480, "HTC Desire"));
+        scores.add( drawRatio(g, 480, 320, "iPhone 3G/3GS"));
+//System.out.println(drawRatio(g, 2048, 1536, "iPad Air") / ((double)width * height));
+//System.out.println(drawRatio(g, 1136, 640, "iPhone 5/5s") / ((double)width * height));
+//System.out.println(drawRatio(g, 960, 640, "iPhone 4/4s") / ((double)width * height));
+        int sum = 0;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<scores.size(); i++) {
+            int s = scores.get(i);
+            sum += s;
+            if(s < min) min = s;
+            if(s > max) max = s;
+        }
+        double denometor = (width * height * scores.size());
+        double mean = (double)sum / denometor;
+        double minRate = (double)min / (width * height);
+        double maxRate = (double)max / (width * height);
+        System.out.println(
+                (double)width / height + ", " + width+"x"+height+", "+
+                mean+", "+minRate+", "+maxRate);
         //drawRatio(g, 5120, 2160, "4K"); 
         //drawRatio(g, 4096, 2160, "DCI 4K");
     }
@@ -112,14 +135,14 @@ class Main {
         g.drawString(w+"x"+h+addon, x+2, y+14);
     }
 
-    private static void drawRatio(Graphics g, int w, int h) {
-        drawRatio(g, w, h, "");
+    private static int drawRatio(Graphics g, int w, int h) {
+        return drawRatio(g, w, h, "");
     }
-    private static void drawRatio(
+    private static int drawRatio(
             Graphics g, int w, int h, String comment) {
         float screen = (float)width / height;
-        System.out.println(
-                String.format("drawing %dx%d: %f", w, h, (float)w/h));
+        //System.out.println(
+        //        String.format("drawing %dx%d: %f", w, h, (float)w/h));
         float ratio = (float)w/h;
         g.setColor(colors[colorIndex++ % colors.length]);
         int nx, ny, nw, nh;
@@ -150,6 +173,7 @@ class Main {
                     w+" x "+h+" - "+ratio+" ("+comment+")", nx + 2, ny + 14);
             }
         }
+        return nw * nh;
     }
 
     public static boolean isNullOrEmpty(String s) {
