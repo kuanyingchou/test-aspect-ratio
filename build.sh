@@ -1,7 +1,22 @@
 #!/bin/bash
 javac *.java
-java Main 1420 964 1420x964.png
-java Main 1920 1080 1920x1080.png
-java Main 2048 1280 2048x1280.png
-java Main 2048 1536 2048x1536.png
-java Main 2048 1462 2048x1462.png
+# for i in $(seq 1080 2 1600); do
+#   java Main 2048 $i test.png
+# done
+
+# java Main 2048 1536 2048x1536.png
+# java Main 2048 1330 2048x1330.png
+ java Main 2048 1328 2048x1328.png
+# java Main 2048 1332 2048x1332.png
+# java Main 2048 1536 test.png
+# java Main 1920 1240 test.png
+# java Main 1920 1200 test.png
+# java Main 1920 1080 test.png 
+# java Main 1420 964 test.png
+# java Main 1280 800 test.png
+# java Main 1280 720 test.png
+# java Main 1024 768 test.png
+# java Main 1136 640 test.png
+# java Main 960 640  test.png
+# java Main 800 480  test.png
+# java Main 480 320  test.png
